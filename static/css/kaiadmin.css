@@ -326,7 +326,7 @@ body {
   border: 1px solid #eaeaea; }
 
 .main-header {
-  background: #ffffff;
+  background: #eaecee;
   min-height: 60px;
   width: calc(100% - 250px);
   position: fixed;
@@ -540,7 +540,7 @@ body {
 .footer {
   border-top: 1px solid #eee;
   padding: 15px;
-  background: #ffffff;
+  background: #d2d8dc;
   position: absolute;
   width: 100%; }
   .footer .container, .footer .container-fluid {
@@ -1585,10 +1585,10 @@ body[data-background-color="dark"] .border-top {
   border-radius: 10px;
   background-color: #ffffff;
   margin-bottom: 30px;
-  -webkit-box-shadow: 2px 6px 15px 0px rgba(69, 65, 78, 0.1);
+  /* -webkit-box-shadow: 2px 6px 15px 0px rgba(69, 65, 78, 0.1);
   -moz-box-shadow: 2px 6px 15px 0px rgba(69, 65, 78, 0.1);
-  box-shadow: 2px 6px 15px 0px rgba(69, 65, 78, 0.1);
-  border: 0px; }
+  box-shadow: 2px 6px 15px 0px rgba(69, 65, 78, 0.1); */
+  border: 2px solid #d2d8dc;  /* Border color */}
   .card .card-header, .card-light .card-header {
     padding: 1rem 1.25rem;
     background-color: transparent;
@@ -6089,7 +6089,7 @@ label.error {
     padding: 20px; } }
 /* 	 Background Body */
 body {
-  background: #F5F7FD; }
+  background: #eeeeee; }
   body[data-background-color="bg1"] {
     background: #F5F7FD; }
   body[data-background-color="bg2"] {

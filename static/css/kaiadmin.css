@@ -88,7 +88,6 @@ danger-color : #f3545d
 body, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, .btn-simple, .alert, a, .td-name, td, button.close {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  /* font-family: 'Public Sans', sans-serif; } */
   font-family: 'Roboto'; }
 
 body, html {
@@ -2989,26 +2988,26 @@ label.error {
     border: 2px solid #eee !important; }
 
 /*     Table    */
-/* .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
   vertical-align: middle; }
-.table > tbody > tr > td, .table > tbody > tr > th {
+/* .table > tbody > tr > td, .table > tbody > tr > th {
   padding: 16px 24px !important; }
 .table > tfoot > tr > td, .table > tfoot > tr > th {
   padding: 12px 24px !important; } */
 .table thead th {
   background-color: #d2d8dc;
   font-size: .95rem;
-  /* text-transform: uppercase;
-  letter-spacing: 1px; */
-  padding: 12px 24px !important;
+  /* text-transform: uppercase; */
+  /* letter-spacing: 1px; */
+  padding: 5px; 
   border-bottom-width: 1px;
   font-weight: 600; }
-
+  
 .table td, .table th {
   font-size: 1rem;
   border-top-width: 0px;
   border: 1px solid;
-  border-color: #999999 !important;
+  border-color: #b8c3d0 !important;
   vertical-align: middle !important; }
 
 /* Menghilangkan border kiri pada semua kolom kecuali kolom pertama */

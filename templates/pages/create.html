@@ -1,0 +1,145 @@
+{% extends 'layouts/base.html' %}
+{% load static custom_filters %}
+<!-- [ Main Content ] start -->
+{% block content %}
+<!-- <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+    <div>
+        <h3 class="fw-bold mb-3">Dashboard</h3>
+        <h6 class="op-7 mb-2">Free Bootstrap 5 Admin Dashboard</h6>
+    </div>
+    <div class="ms-md-auto py-2 py-md-0">
+        <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
+        <a href="#" class="btn btn-primary btn-round">Add Customer</a>
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-stats card-round">
+            <form method="post">
+                {% csrf_token %}
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">{{ card_title }}</h4>
+                        <div class="ms-auto">
+                            <div class="input-group">
+                                <input type="number" id="rowCount" class="form-control w-25" min="1">
+                                <button class="btn btn-sm btn-primary" type="button" id="addRows"><i class="fa fa-plus me-2"></i>Add Rows</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="add-row" class="table table-sm table-hover" >
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    {% for field in form %}
+                                        <th>{{ field.label }}</th>
+                                    {% endfor %}
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- ListView -->
+                                {% for item in items %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    {% for field in form %}
+                                    <td>{{ item|get_field_value:field.name|safe }}</td>
+                                    {% endfor %}
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#act-{{ item.id }}">Options </button>
+                                        <div id="act-{{ item.id }}" class="collapse mt-1">
+                                            {% for value in item.buttons_action %}
+                                                {{ value|safe }}
+                                            {% endfor %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                <!-- End ListView -->
+
+                                <!-- Form -->
+                                <tr>
+                                    <td>{{ items|length|add:1 }}</td>
+                                    {% for field in form %}
+                                        <td>{{ field }}</td>
+                                    {% endfor %}
+                                    <td><button type="button" class="btn btn-danger btn-sm deleteRow"><i class="fa fa-trash"></i></button></td> 
+                                </tr>
+                                <!-- End Form -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                    <button type="button" class="btn btn-sm btn-dark">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Tambahkan baris saat tombol "Add Rows" diklik
+        $('#addRows').on('click', function() {
+            // Ambil jumlah baris yang diinput
+            var rowCount = $('#rowCount').val();
+
+            // Jika input kosong, tambahkan 1 baris
+            if (rowCount === "") {
+                rowCount = 1;
+            }
+            
+            // Jika input bukan angka atau 0, jangan tambahkan baris
+            else if (isNaN(rowCount) || rowCount <= 0) {
+                alert('Input tidak valid! Masukkan angka lebih dari 0.');
+                return;
+            }
+
+            // Loop untuk menambahkan baris sesuai jumlah yang diinput
+            for (var i = 0; i < rowCount; i++) {
+                // Hitung nomor baris
+                var currentRowCount = $('#add-row tbody tr').length + 1;
+
+                // Buat baris baru
+                var newRow = `
+                    <tr>
+                        <td>${currentRowCount}</td>
+                        {% for field in form %}
+                            <td><input type="text" name="{{ field.name }}" class="form-control" /></td>
+                        {% endfor %}
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm deleteRow">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+
+                // Tambahkan baris ke tabel
+                $('#add-row tbody').append(newRow);
+            }
+
+            // Reset input jumlah baris
+            $('#rowCount').val('');
+        });
+
+        // Hapus baris saat tombol "Delete" diklik
+        $('#add-row tbody').on('click', '.deleteRow', function() {
+            $(this).closest('tr').remove();
+
+            // Perbarui nomor baris setelah menghapus
+            $('#add-row tbody tr').each(function(index) {
+                $(this).find('td:first').text(index + 1);
+            });
+        });
+    });
+</script>
+
+ 
+<!-- [ Main Content ] end -->
+{% endblock content %}

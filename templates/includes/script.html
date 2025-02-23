@@ -35,6 +35,16 @@
 <!-- Kaiadmin DEMO methods, don't include it in your project! -->
 <script src="{% static 'js/setting-demo.js' %}"></script>
 <script src="{% static 'js/demo.js' %}"></script>
+
+<!-- preloader -->
+<script>
+    window.addEventListener('load', function() {
+        // Add the 'hide' class to fade out the preloader
+        const preloader = document.getElementById('page-preloader');
+        preloader.classList.add('hide');
+    });
+</script>
+
 <script>
     $('#lineChart').sparkline([102,109,120,99,110,105,115], {
         type: 'line',

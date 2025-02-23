@@ -2520,12 +2520,14 @@ label {
 /*     Form     */
 .form-control {
   font-size: 1rem;
-  border-color: #ebedf2;
-  padding: 0.6rem 1rem;
+  border-color: #b8c3d0;
+  /* background-color: #ebedf2; */
+  /* padding: 0.6rem 1rem; */
   height: inherit !important;
-  border-width: 2px; }
+  border-width: 1px; }
   .form-control:focus {
-    border-color: #3e93ff; }
+    background-color: #fff09f;
+    border-color: #b8c3d0; }
 
 /*     Form Control Sizes    */
 .form-control-lg, .input-group-lg > .form-control, .input-group-lg > .input-group-append > .btn,
@@ -3001,12 +3003,22 @@ label.error {
   padding: 12px 24px !important;
   border-bottom-width: 1px;
   font-weight: 600; }
+
 .table td, .table th {
   font-size: 1rem;
   border-top-width: 0px;
   border: 1px solid;
-  border-color: #d2d8dc !important;
+  border-color: #999999 !important;
   vertical-align: middle !important; }
+
+/* Menghilangkan border kiri pada semua kolom kecuali kolom pertama */
+table th:not(:first-child), table td:not(:first-child) {
+  border-left: none;
+}
+/* Menghilangkan border top pada semua baris kecuali baris pertama */
+table tr:not(:first-child) th, table tr:not(:first-child) td {
+  border-top: none;
+}
 
 .table .thead-light th {
   background-color: #f6f9fc;

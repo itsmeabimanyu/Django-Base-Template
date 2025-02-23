@@ -6,11 +6,9 @@
         {% block extrahead %}{% endblock extrahead %}
     </head>
     <body>
-        {% comment %}
         {% block pre_loader %}
-            {% include 'includes/pre-loader.html' %}
+            {% include 'includes/preloader.html' %}
         {% endblock pre_loader %}
-        {% endcomment %}
         <div class="wrapper">
             {% block sidebar %}
                 {% include 'includes/sidebar.html' %}

@@ -20,6 +20,18 @@ class ModelStorageCreateView(CreateView, ListView):
         context = super().get_context_data(**kwargs)
         context['card_title'] = 'Create New Storage'
         return context
+    
+    def form_valid(self, form):
+        storage_initials = self.request.POST.getlist('storage_initial')  # Menangani multiple storage_initial
+        descriptions = self.request.POST.getlist('description')  # Menangani multiple description
+
+        for storage, desc in zip(storage_initials, descriptions):
+            self.model.objects.create(
+                storage_initial=storage,
+                description=desc,
+            )
+
+        return redirect(self.request.META.get('HTTP_REFERER'))
 
     '''def post(self, request, *args, **kwargs):
         # Menangani formset ketika data POST dikirimkan

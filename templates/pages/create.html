@@ -44,7 +44,7 @@
                                 <!-- ListView -->
                                 {% for item in items %}
                                 <tr>
-                                    <td>{{ forloop.counter }}</td>
+                                    <td class="clickable">{{ forloop.counter }}</td>
                                     {% for field in form %}
                                     <td>{{ item|get_field_value:field.name|safe }}</td>
                                     {% endfor %}
@@ -84,6 +84,15 @@
 
 <script>
     $(document).ready(function() {
+        // Menyembunyikan kolom ketiga hingga sebelum kolom terakhir
+        $('#add-row').each(function() {
+            var totalColumns = $(this).find('tr:first').children('th').length; // Menghitung jumlah kolom header
+            // Menyembunyikan kolom kedua hingga sebelum kolom terakhir di header dan body
+            $(this).find('tr').each(function() {
+                $(this).children('th:nth-child(n+3):nth-child(-n+' + (totalColumns - 1) + '), td:nth-child(n+3):nth-child(-n+' + (totalColumns - 1) + ')').hide();
+            });
+        });
+        
         // Tambahkan baris saat tombol "Add Rows" diklik
         $('#addRows').on('click', function() {
             // Ambil jumlah baris yang diinput
@@ -137,6 +146,36 @@
                 $(this).find('td:first').text(index + 1);
             });
         });
+
+        // Ketika baris yang dapat diklik diklik
+        $('#add-row tbody').on('click', 'td.clickable', function() {
+            var td = $(this); // <td> yang diklik
+            var tr = td.closest('tr'); // <tr> yang mengandung <td> yang diklik
+            // var tr = $(this);
+            var childRow = tr.next('.child-row');
+
+            if (childRow.length) {
+                // Jika baris anak sudah ada, toggle tampilannya
+                childRow.toggle();
+            } else {
+                // Jika baris anak belum ada, buat dan tampilkan
+                var childContent = '<tr class="child-row"><td colspan="5">';
+                childContent += '<table class="table table-sm table-secondary">';
+
+                // Ambil data dari kolom yang disembunyikan
+                tr.find('td').each(function(index) {
+                    if (index > 0 && index < tr.find('td').length - 1) {
+                        var columnName = $('#add-row th').eq(index).text();
+                        var columnValue = $(this).text();
+                        childContent += '<tr><td class="w-25"><strong>' + columnName + '</strong></td><td>' + columnValue + '</td></tr>';
+                    }
+                });
+
+                childContent += '</table></td></tr>';
+                tr.after(childContent); // Tambahkan baris anak setelah baris yang diklik
+            }
+        });
+
     });
 </script>
 
